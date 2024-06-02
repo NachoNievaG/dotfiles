@@ -123,7 +123,7 @@ keybinds clear-defaults=true {
 	}
 	tmux {
 		bind "[" { SwitchToMode "Scroll"; }
-		bind "Ctrl b" { Write 2; SwitchToMode "Normal"; }
+		bind "Ctrl Space" { Write 2; SwitchToMode "Normal"; }
 		bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }
 		bind "%" { NewPane "Right"; SwitchToMode "Normal"; }
 		bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
@@ -135,10 +135,10 @@ keybinds clear-defaults=true {
 		bind "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
 		bind "Down" { MoveFocus "Down"; SwitchToMode "Normal"; }
 		bind "Up" { MoveFocus "Up"; SwitchToMode "Normal"; }
-		bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
-		bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
-		bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
-		bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
+		bind "Ctrl h" { MoveFocus "Left"; SwitchToMode "Normal"; }
+		bind "Ctrl l" { MoveFocus "Right"; SwitchToMode "Normal"; }
+		bind "Ctrl j" { MoveFocus "Down"; SwitchToMode "Normal"; }
+		bind "Ctrl k" { MoveFocus "Up"; SwitchToMode "Normal"; }
 		bind "o" { FocusNextPane; }
 		bind "d" { Detach; }
 		bind "Space" { NextSwapLayout; }
@@ -178,7 +178,7 @@ keybinds clear-defaults=true {
 		bind "Alt r" { SwitchToMode "RenameTab"; }
 	}
 	shared_except "tmux" "locked" {
-		bind "Ctrl b" { SwitchToMode "Tmux"; }
+		bind "Ctrl Space" { SwitchToMode "Tmux"; }
 	}
 }
 
