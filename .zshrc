@@ -1,3 +1,9 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -47,7 +53,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# aliases
 alias v=nvim
 export EDITOR='nvim'
 alias zsh="nvim ~/.zshrc"
@@ -56,6 +61,7 @@ alias ohmy="nvim ~/.oh-my-zsh"
 alias k=kubectl
 export NVIM="$HOME/.config/nvim"
 alias ide="cd $HOME/code && v"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/Users/mate.dev/Library/Python/3.9/bin"
 export PATH="$PATH:/opt/homebrew/bin/pyenv"
@@ -71,3 +77,7 @@ eval "$(pyenv init -)"
 # atac key bindings
 export ATAC_KEY_BINDINGS='/Users/mate.dev/.config/atac/config.toml'
 
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
