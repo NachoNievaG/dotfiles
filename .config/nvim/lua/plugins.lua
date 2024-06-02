@@ -4,7 +4,6 @@ return {
 	{ "christoomey/vim-tmux-navigator" },
 	{ "github/copilot.vim" },
 	{ "lervag/vimtex" },
-	{ "rebelot/kanagawa.nvim", priority = 1000 },
 	{
 		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
