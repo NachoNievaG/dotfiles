@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = {}
 
-config.font = wezterm.font("Consolas")
+config.font = wezterm.font("FiraCode Nerd Font Mono")
 config.font_size = 22
 config.window_background_opacity = 0.7
 config.window_decorations = "RESIZE"

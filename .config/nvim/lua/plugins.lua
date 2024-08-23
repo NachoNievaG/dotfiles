@@ -4,6 +4,7 @@ return {
 	{ "christoomey/vim-tmux-navigator" },
 	{ "github/copilot.vim" },
 	{ "lervag/vimtex" },
+	{ "sindrets/diffview.nvim" },
 	{
 		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
@@ -19,7 +20,11 @@ return {
 	},
 	{ "tpope/vim-fugitive" },
 	{ "folke/neodev.nvim", opts = {} },
-	{ "simrat39/rust-tools.nvim" },
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4", -- Recommended
+		lazy = false, -- This plugin is already lazy
+	},
 	{
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
@@ -53,7 +58,7 @@ return {
 				modules = {},
 				auto_install = true,
 				sync_install = false,
-				ensure_installed = { "lua", "vim", "go", "bash", "markdown", "markdown_inline", "sql" },
+				ensure_installed = { "lua", "vim", "go", "bash", "markdown", "markdown_inline", "sql", "rust" },
 				ignore_install = {},
 				highlight = { enable = true },
 				indent = { enable = true },
@@ -85,13 +90,7 @@ return {
 	},
 
 	-- DAP
-	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = { "mfussenegger/nvim-dap" },
-		init = function()
-			require("dapui").setup()
-		end,
-	},
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 	{
 		"leoluz/nvim-dap-go",
 		init = function()
@@ -128,13 +127,6 @@ return {
 			lsp_zero.on_attach(function(client, bufnr)
 				lsp_zero.default_keymaps({ buffer = bufnr })
 			end)
-
-			local rust_lsp = lsp_zero.build_options("rust_analyzer", {})
-
-			lsp_zero.setup()
-			-- Initialize rust_analyzer with rust-tools
-			require("rust-tools").setup({ server = rust_lsp })
-			require("lspconfig").tsserver.setup({})
 
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
@@ -299,6 +291,24 @@ return {
 			filetypes = { "toggleterm" }, -- for example: "toggleterm"
 			-- :h 'buftype'
 			buftypes = { "terminal" }, -- for example: "terminal"
+		},
+	},
+	{
+		"mgierada/lazydocker.nvim",
+		dependencies = { "akinsho/toggleterm.nvim" },
+		config = function()
+			require("lazydocker").setup({})
+		end,
+	},
+	{
+		"OXY2DEV/markview.nvim",
+
+		dependencies = {
+			-- You may not need this if you don't lazy load
+			-- Or if the parsers are in your $RUNTIMEPATH
+			"nvim-treesitter/nvim-treesitter",
+
+			"nvim-tree/nvim-web-devicons",
 		},
 	},
 }
