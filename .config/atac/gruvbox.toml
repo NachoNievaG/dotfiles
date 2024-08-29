@@ -1,0 +1,29 @@
+# Base colors:
+# Black, Red, Green, Yellow, Blue, Magenta, Cyan, Gray, DarkGray
+# LightRed, LightGreen, LightYellow, LightBlue, LightMagenta, LightCyan, White
+#
+# Hex codes also work, e.g.  "#1a2b3c"
+
+[ui]
+font_color = "#ebdbb2" # Gruvbox light foreground
+# This can be null to preserve original terminal background
+app_background = "#282828" # Gruvbox dark background
+
+main_foreground_color = "#fabd2f" # Gruvbox bright yellow
+secondary_foreground_color = "#a89984" # Gruvbox gray
+
+main_background_color = "#3c3836" # Gruvbox dark gray (for DarkGray)
+secondary_background_color = "#282828" # Gruvbox dark background
+
+[others]
+selection_highlight_color = "#fabd2f" # Gruvbox bright yellow
+environment_variable_highlight_color = "#b8bb26" # Gruvbox green
+
+[methods]
+GET = "#8ec07c" # Gruvbox green (for LightGreen)
+POST = "#b16286" # Gruvbox pink (for LightMagenta)
+PUT = "#d65d0e" # Gruvbox orange
+PATCH = "#fabd2f" # Gruvbox yellow
+DELETE = "#fb4934" # Gruvbox red (for LightRed)
+HEAD = "#83a598" # Gruvbox aqua (for LightCyan)
+OPTIONS = "#83a598" # Gruvbox aqua (for LightCyan)

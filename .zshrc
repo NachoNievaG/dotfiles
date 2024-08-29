@@ -1,71 +1,91 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#######################
+#        ZINIT        #
+#######################
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # If you're using macOS, you'll want this enabled
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-export ZSH="$HOME/.oh-my-zsh"
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-ZSH_THEME="robbyrussell"
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
-# plugins
-# basic plugin manager to automatically import zsh plugins
-# script by mattmc3 from https://github.com/mattmc3/zsh_unplugged
-# clone a plugin, identify its init file, source it, and add it to your fpath
-function plugin-load {
-	local repo plugdir initfile initfiles=()
-	: ${ZPLUGINDIR:=${ZDOTDIR:-~/.config/zsh}/plugins}
-	for repo in $@; do
-		plugdir=$ZPLUGINDIR/${repo:t}
-		initfile=$plugdir/${repo:t}.plugin.zsh
-		if [[ ! -d $plugdir ]]; then
-			echo "Cloning $repo..."
-			git clone -q --depth 1 --recursive --shallow-submodules \
-				https://github.com/$repo $plugdir
-		fi
-		if [[ ! -e $initfile ]]; then
-			initfiles=($plugdir/*.{plugin.zsh,zsh-theme,zsh,sh}(N))
-			(( $#initfiles )) || { echo >&2 "No init file '$repo'." && continue }
-			ln -sf $initfiles[1] $initfile
-		fi
-		fpath+=$plugdir
-		(( $+functions[zsh-defer] )) && zsh-defer . $initfile || . $initfile
-	done
-}
+# Add in snippets
+zinit snippet OMZP::git
 
-# list of github repos of plugins
-repos=(
-	romkatv/powerlevel10k
-	jeffreytse/zsh-vi-mode
+# Load completions
+autoload -Uz compinit && compinit
 
-	zsh-users/zsh-autosuggestions
-	zdharma-continuum/fast-syntax-highlighting
-)
-plugin-load $repos
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
+zinit cdreplay -q
 
-# fzf history
-source <(fzf --zsh)
-HISTFILE=~/.zsh_history
+#######################
+#       History       #
+#######################
 HISTSIZE=10000
-SAVEHIST=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
 setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
+
+###########################
+# custom fzf key bindings #
+###########################
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+bindkey -s ^f "tmux-sessionizer\n"
+#############################
+# FZF & Zoxide key bindings #
+#############################
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(starship init zsh)"
+##########################
+
+# Example aliases
+alias iv='nvim $(fzf -m --preview "bat --color=always --style=header,grid --line-range :500 {}")'
+alias zshconfig="nvim ~/.zshrc"
+alias ls='ls --color'
+alias grep="rg"
 alias v=nvim
-export EDITOR='nvim'
-alias zsh="nvim ~/.zshrc"
-alias ohmy="nvim ~/.oh-my-zsh"
+alias z=__zoxide_z
+alias zi=__zoxide_zi
+#######################
 
-alias k=kubectl
-export NVIM="$HOME/.config/nvim"
-alias ide="cd $HOME/code && v"
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-export PATH="$PATH:$HOME/go/bin"
-export PATH="$PATH:/Users/mate.dev/Library/Python/3.9/bin"
-export PATH="$PATH:/opt/homebrew/bin/pyenv"
+#GO
+export PATH=$(go env GOPATH)/bin:$PATH 
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$(go env GOPATH)/bin
+export PATH="$PATH":"$HOME/.local/scripts/"
+#PYENV
+export PATH=$(pyenv root)/shims:$PATH
+export PATH="/opt/homebrew/bin/nvim:$PATH"
+export ATAC_KEY_BINDINGS='/Users/nachonieva/.config/atac/config.toml'
 
+echo "ZSH Config Loaded"
 # rust
 source $HOME/.cargo/env
 # Tex
@@ -76,8 +96,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 # atac key bindings
 export ATAC_KEY_BINDINGS='/Users/mate.dev/.config/atac/config.toml'
+export ATAC_THEME='/Users/mate.dev/.config/atac/gruvbox_light.toml'
 
-
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(starship init zsh)"
