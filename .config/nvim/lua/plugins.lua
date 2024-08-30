@@ -92,15 +92,6 @@ return {
 	-- DAP
 	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-neotest/nvim-nio",
-			"nvim-lua/plenary.nvim",
-			"antoinemadec/FixCursorHold.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-	},
-	{
 		"leoluz/nvim-dap-go",
 		init = function()
 			require("dap-go").setup()
@@ -308,16 +299,5 @@ return {
 		config = function()
 			require("lazydocker").setup({})
 		end,
-	},
-	{
-		"OXY2DEV/markview.nvim",
-
-		dependencies = {
-			-- You may not need this if you don't lazy load
-			-- Or if the parsers are in your $RUNTIMEPATH
-			"nvim-treesitter/nvim-treesitter",
-
-			"nvim-tree/nvim-web-devicons",
-		},
 	},
 }

@@ -21,9 +21,9 @@ environment_variable_highlight_color = "#b8bb26" # Gruvbox green
 
 [methods]
 GET = "#8ec07c" # Gruvbox green (for LightGreen)
-POST = "#b16286" # Gruvbox pink (for LightMagenta)
+POST = "#b16299" # Gruvbox pink (for LightMagenta)
 PUT = "#d65d0e" # Gruvbox orange
 PATCH = "#fabd2f" # Gruvbox yellow
 DELETE = "#fb4934" # Gruvbox red (for LightRed)
-HEAD = "#83a598" # Gruvbox aqua (for LightCyan)
+HEAD = "#b8bb26" # Gruvbox aqua (for LightCyan)
 OPTIONS = "#83a598" # Gruvbox aqua (for LightCyan)
