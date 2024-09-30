@@ -210,6 +210,7 @@ return {
 			require("todo-comments").setup({})
 		end,
 	},
+	-- TODO: Add this to the lazy.nvim repo
 
 	{
 		"stevearc/oil.nvim",
