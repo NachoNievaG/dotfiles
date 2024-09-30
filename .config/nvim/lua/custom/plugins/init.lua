@@ -3,10 +3,19 @@
 --
 -- See the kickstart.nvim README for more information
 
+vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit', nowait = true, remap = false })
+vim.keymap.set('n', '<leader>w', '<cmd>w!<CR>', { desc = 'Save', nowait = true, remap = false })
+
 return {
-  { 'christoomey/vim-tmux-navigator' },
+  { 'christoomey/vim-tmux-navigator' }, -- done
   { 'lervag/vimtex' },
-  { 'sindrets/diffview.nvim' },
+  {
+    'sindrets/diffview.nvim',
+    config = function()
+      vim.keymap.set('n', '<leader>gd', '<cmd>DiffviewOpen<CR>', { desc = '[G]it [D]iff' })
+      vim.keymap.set('n', '<leader>gq', '<cmd>DiffviewClose<CR>', { desc = '[G]it Diff [Q]uit' })
+    end,
+  },
   {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
@@ -14,6 +23,12 @@ return {
     config = function()
       local harpoon = require 'harpoon'
       harpoon:setup {}
+      vim.keymap.set('n', '<leader>ma', function()
+        harpoon:list():append()
+      end, { desc = 'Add File', nowait = true, remap = false })
+      vim.keymap.set('n', '<leader>mo', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end, { desc = 'Menu', nowait = true, remap = false })
     end,
   },
   {
@@ -22,11 +37,18 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+    config = function()
+      vim.keymap.set('n', '<leader>gg', '<cmd>LazyGit<CR>', { desc = 'LazyGit' })
+    end,
   },
   {
     'leoluz/nvim-dap-go',
     init = function()
       require('dap-go').setup()
+      vim.keymap.set('n', '<leader>xg', function()
+        require('dap-go').debug_test()
+        require('dapui').toggle()
+      end, { desc = 'Debug Go Test', nowait = true, remap = false })
     end,
   },
   {
@@ -53,6 +75,7 @@ return {
           vim.schedule(db_completion)
         end,
       })
+      vim.keymap.set('n', '<leader>db', '<cmd>DBUIToggle<cr>', { desc = '[D]ad[B]od', nowait = true, remap = false })
     end,
   },
   {
@@ -66,7 +89,10 @@ return {
   {
     'stevearc/oil.nvim',
     opts = {},
-    -- Optional dependencies
+    config = function()
+      require('oil').setup()
+      vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+    end,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   {
@@ -74,6 +100,7 @@ return {
     dependencies = { 'akinsho/toggleterm.nvim' },
     config = function()
       require('lazydocker').setup {}
+      vim.keymap.set('', '<leader>gP', '<cmd>Lazydocker<CR>', { desc = 'LazyDocker' })
     end,
   },
 }

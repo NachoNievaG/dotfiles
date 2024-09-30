@@ -279,6 +279,13 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+    config = function()
+      vim.keymap.set('n', '<leader>gj', "<cmd>lua require 'gitsigns'.next_hunk()<cr>", { desc = 'Next Hunk', nowait = true, remap = false })
+      vim.keymap.set('n', '<leader>gk', "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", { desc = 'Prev Hunk', nowait = true, remap = false })
+      vim.keymap.set('n', '<leader>gl', "<cmd>lua require 'gitsigns'.blame_line()<cr>", { desc = 'Blame', nowait = true, remap = false })
+      vim.keymap.set('n', '<leader>gp', "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", { desc = 'Preview Hunk', nowait = true, remap = false })
+      vim.keymap.set('n', '<leader>gr', "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", { desc = 'Reset Hunk', nowait = true, remap = false })
+    end,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -417,10 +424,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = '[F]ind by [G]rep' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
+      vim.keymap.set('n', '<leader>fp', '<cmd>TodoTelescope keywords=TODO,FIX <cr>', { noremap = true, silent = true })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
       vim.keymap.set('n', 'gr', builtin.lsp_references, { noremap = true, silent = true })
       vim.keymap.set('n', 'gi', builtin.lsp_implementations, { noremap = true, silent = true })
       vim.keymap.set('n', 'gd', builtin.lsp_definitions, { noremap = true, silent = true })
+
       vim.keymap.set(
         'n',
         '<leader><leader>',
@@ -530,7 +539,6 @@ require('lazy').setup({
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
-
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
@@ -949,9 +957,9 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
