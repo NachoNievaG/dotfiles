@@ -8,6 +8,7 @@ vim.keymap.set('n', '<leader>w', '<cmd>w!<CR>', { desc = 'Save', nowait = true, 
 
 return {
   { 'christoomey/vim-tmux-navigator' }, -- done
+  { 'nvzone/showkeys', cmd = 'ShowkeysToggle', config = { show_count = true } },
   { 'lervag/vimtex' },
   {
     'sindrets/diffview.nvim',
@@ -17,23 +18,7 @@ return {
     end,
   },
   {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      local harpoon = require 'harpoon'
-      harpoon:setup {}
-      vim.keymap.set('n', '<leader>ma', function()
-        harpoon:list():append()
-      end, { desc = 'Add File', nowait = true, remap = false })
-      vim.keymap.set('n', '<leader>mo', function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
-      end, { desc = 'Menu', nowait = true, remap = false })
-    end,
-  },
-  {
     'kdheepak/lazygit.nvim',
-    -- optional for floating window border decoration
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
@@ -49,33 +34,6 @@ return {
         require('dap-go').debug_test()
         require('dapui').toggle()
       end, { desc = 'Debug Go Test', nowait = true, remap = false })
-    end,
-  },
-  {
-    'kristijanhusak/vim-dadbod-ui',
-    dependencies = { 'tpope/vim-dadbod', 'kristijanhusak/vim-dadbod-completion', 'tpope/vim-dotenv' },
-    config = function()
-      local function db_completion()
-        require('cmp').setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }
-      end
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = {
-          'sql',
-        },
-        command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
-      })
-
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = {
-          'sql',
-          'mysql',
-          'plsql',
-        },
-        callback = function()
-          vim.schedule(db_completion)
-        end,
-      })
-      vim.keymap.set('n', '<leader>db', '<cmd>DBUIToggle<cr>', { desc = '[D]ad[B]od', nowait = true, remap = false })
     end,
   },
   {
@@ -100,17 +58,22 @@ return {
     dependencies = { 'akinsho/toggleterm.nvim' },
     config = function()
       require('lazydocker').setup {}
-      vim.keymap.set('', '<leader>gP', '<cmd>Lazydocker<CR>', { desc = 'LazyDocker' })
+      vim.keymap.set('n', '<leader>gP', '<cmd>Lazydocker<CR>', { desc = 'LazyDocker' })
     end,
   },
   {
-      "OXY2DEV/markview.nvim",
-      lazy = false,      -- Recommended
-      ft = "markdown", -- If you decide to lazy-load anyway
+    'OXY2DEV/markview.nvim',
+    lazy = false, -- Recommended
+    ft = 'markdown', -- If you decide to lazy-load anyway
 
-      dependencies = {
-          "nvim-treesitter/nvim-treesitter",
-          "nvim-tree/nvim-web-devicons"
-      }
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
   },
+  -- {
+  --   dir = '~/projects/curly.nvim',
+  --   opts = {},
+  -- },
+  --
 }

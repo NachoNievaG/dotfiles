@@ -655,6 +655,8 @@
          (bash-ts-mode . lsp)                           ;; Enable LSP for Bash
          (typescript-ts-mode . lsp)                     ;; Enable LSP for TypeScript
          (tsx-ts-mode . lsp)                            ;; Enable LSP for TSX
+         (gopls-mode . lsp)                             ;; Enable LSP for TSX
+         (python-mode . lsp)                             ;; Enable LSP for TSX
          (js-mode . lsp)                                ;; Enable LSP for JavaScript
          (js-ts-mode . lsp)                             ;; Enable LSP for JavaScript (TS mode)
          (lsp-mode . lsp-enable-which-key-integration)) ;; Integrate with Which Key
@@ -1195,6 +1197,19 @@ nothing happens."
     (progn  (make-local-variable 'after-save-hook)
         (add-hook 'after-save-hook 'compile-on-save-start nil t))
       (kill-local-variable 'after-save-hook)))
+
+;; Enable windmove for easy navigation
+(windmove-default-keybindings)
+
+;; Rebind to use Ctrl + h/j/k/l for buffer navigation
+(global-set-key (kbd "C-h") 'windmove-left)
+(global-set-key (kbd "C-j") 'windmove-down)
+(global-set-key (kbd "C-k") 'windmove-up)
+(global-set-key (kbd "C-l") 'windmove-right)
+
+;; Ensure that `C-h` is not bound to `help-command`
+(global-unset-key (kbd "C-h"))
+
 
 (use-package lsp-pyright
   :ensure t
