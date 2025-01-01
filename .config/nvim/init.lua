@@ -727,7 +727,8 @@ require('lazy').setup({
         }
       end,
       formatters_by_ft = {
-        lua = { 'stylua', 'goimports' },
+        lua = { 'stylua' },
+        go = { 'goimports' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -868,8 +869,15 @@ require('lazy').setup({
     'ellisonleao/gruvbox.nvim',
     priority = 1000,
     config = function()
-      require('gruvbox').setup { transparent_mode = true }
+      require('gruvbox').setup {
+        contrast = 'hard',
+        palette_overrides = {
+          gray = '#2eb542', -- comments are GREEN
+        },
+        transparent_mode = true,
+      }
       vim.o.background = 'dark' -- or "light" for light mode
+
       vim.cmd [[colorscheme gruvbox]]
     end,
   },
@@ -952,14 +960,7 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
 }, {
   ui = {
