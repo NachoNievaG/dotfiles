@@ -877,6 +877,7 @@ require('lazy').setup({
         },
         transparent_mode = true,
       }
+      vim.o.conceallevel = 1
       vim.o.background = 'dark' -- or "light" for light mode
 
       vim.cmd [[colorscheme gruvbox]]

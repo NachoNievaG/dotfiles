@@ -99,3 +99,6 @@ export ATAC_KEY_BINDINGS='/Users/mate.dev/.config/atac/config.toml'
 export ATAC_THEME='/Users/mate.dev/.config/atac/gruvbox_light.toml'
 
 eval "$(starship init zsh)"
+
+alias ow='cd $HOME/work/notes && nvim'
+alias op='cd $HOME/personal/notes && nvim'
