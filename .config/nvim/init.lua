@@ -397,6 +397,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
+          file_ignore_patterns = { '%_mock.go' },
           mappings = {
             n = {
               ['d'] = require('telescope.actions').delete_buffer,
