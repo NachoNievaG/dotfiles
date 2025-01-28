@@ -1,9 +1,9 @@
 local obs_opts = {
   workspaces = {
-    {
-      name = 'personal',
-      path = '~/personal/notes',
-    },
+    -- {
+    --   name = 'personal',
+    --   path = '~/personal/notes',
+    -- },
     {
       name = 'work',
       path = '~/work/notes',
@@ -78,6 +78,9 @@ return {
   opts = {},
   config = function()
     require('obsidian').setup(obs_opts)
-    vim.keymap.set('n', '<leader>on', '<cmd>ObsidianToday<CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>oo', '<cmd>ObsidianToday<CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>oy', '<cmd>ObsidianYesterday<CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>ot', '<cmd>ObsidianTomorrow<CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>ow', '<cmd>ObsidianQuickSwitch<CR>', { noremap = true, silent = true })
   end,
 }
