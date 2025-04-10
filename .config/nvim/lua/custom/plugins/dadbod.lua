@@ -17,6 +17,7 @@ local dadbod = {
         'sql',
         'mysql',
         'plsql',
+        'psql',
       },
       callback = function()
         vim.schedule(db_completion)

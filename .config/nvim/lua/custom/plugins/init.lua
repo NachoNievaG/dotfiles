@@ -73,5 +73,10 @@ return {
   --   dir = '~/projects/curly.nvim',
   --   opts = {},
   -- },
-  --
+  {
+    'nvzone/typr',
+    dependencies = 'nvzone/volt',
+    opts = {},
+    cmd = { 'Typr', 'TyprStats' },
+  }, --
 }

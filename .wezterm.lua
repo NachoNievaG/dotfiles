@@ -14,6 +14,26 @@ config.keys = {
     mods = 'ALT',
     action = wezterm.action.DisableDefaultAssignment,
   },
+  {
+    key = 'h',
+    mods = 'ALT',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = 'j',
+    mods = 'ALT',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = 'k',
+    mods = 'ALT',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+  {
+    key = 'l',
+    mods = 'ALT',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
 }
 
 config.color_scheme = 'Gruvbox Dark (Gogh)'
