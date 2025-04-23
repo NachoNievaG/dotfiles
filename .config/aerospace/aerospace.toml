@@ -121,6 +121,7 @@ alt-o = 'workspace 4'
 alt-p = 'workspace 5'
 alt-a = 'workspace 6'
 alt-s = 'workspace 7'
+alt-m = 'fullscreen'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-1 = 'move-node-to-workspace 1'
