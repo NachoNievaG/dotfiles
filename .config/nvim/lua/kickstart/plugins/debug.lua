@@ -32,10 +32,18 @@ return {
       { '<leader>xc', dap.continue, desc = 'Debug: Start/Continue' },
       { '<leader>xi', dap.step_into, desc = 'Debug: Step Into' },
       { '<leader>xo', dap.step_over, desc = 'Debug: Step Over' },
-      { '<leader>x', dap.step_out, desc = 'Debug: Step Out' },
+      { '<leader>xr', dap.restart, desc = 'Debug: Restart' },
+      { '<leader>xO', dap.step_out, desc = 'Debug: Step Out' },
       { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
       {
         '<leader>b',
+        function()
+          dap.set_breakpoint()
+        end,
+        desc = 'Debug: Set Breakpoint',
+      },
+      {
+        '<leader>xb',
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
