@@ -1,16 +1,19 @@
 local obs_opts = {
   workspaces = {
-    -- {
-    --   name = 'personal',
-    --   path = '~/personal/notes',
-    -- },
     {
-      name = 'work',
-      path = '~/work/notes',
+      name = 'personal',
+      path = '~/personal/notes',
       overrides = {
         notes_subdir = 'notes',
       },
     },
+    -- {
+    --   name = 'work',
+    --   path = '~/work/notes',
+    --   overrides = {
+    --     notes_subdir = 'notes',
+    --   },
+    -- },
   },
   daily_notes = {
     folder = 'dailies',
@@ -18,11 +21,6 @@ local obs_opts = {
     default_tags = { 'daily-notes' },
     -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
     template = nil,
-  },
-  templates = {
-    folder = 'templates',
-    date_format = '%Y-%m-%d-%a',
-    time_format = '%H:%M',
   },
   completion = {
     -- Set to false to disable completion.
