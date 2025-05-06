@@ -22,12 +22,6 @@ local obs_opts = {
     -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
     template = nil,
   },
-  completion = {
-    -- Set to false to disable completion.
-    nvim_cmp = true,
-    -- Trigger completion at 2 chars.
-    min_chars = 2,
-  },
   mappings = {
     ['gf'] = {
       action = function()

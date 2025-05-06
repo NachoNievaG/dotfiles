@@ -18,6 +18,9 @@ return {
     end,
   },
   {
+    'joshdick/onedark.vim',
+  },
+  {
     'kdheepak/lazygit.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
