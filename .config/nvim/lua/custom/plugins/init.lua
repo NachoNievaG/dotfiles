@@ -11,6 +11,20 @@ return {
   { 'nvzone/showkeys', cmd = 'ShowkeysToggle', config = { show_count = true } },
   { 'lervag/vimtex' },
   {
+    priority = 1000,
+    "ellisonleao/gruvbox.nvim",
+    config = function()
+      vim.opt.background = "dark"
+      require("gruvbox").setup({
+          overrides = {
+              ["@comment"] = { fg = "#2ea542" },
+              SignColumn = {bg = "#ff9900"}
+          }
+      })
+       vim.cmd.colorscheme 'gruvbox'
+    end,
+  },
+  {
     'sindrets/diffview.nvim',
     config = function()
       vim.keymap.set('n', '<leader>gd', '<cmd>DiffviewOpen<CR>', { desc = '[G]it [D]iff' })
@@ -88,4 +102,7 @@ return {
     version = '1.*',
     opts = {}, -- lazy.nvim will implicitly calls `setup {}`
   },
+  {
+    'xiyaowong/transparent.nvim',
+  }
 }
